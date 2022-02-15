@@ -12,10 +12,13 @@ generals:
   # Which hotkey is used to refresh the browser
   #   1: CTRL + F5
   #   2: CTRL + SHIFT + R
-  refresh_page_shortcut: 2
+  refresh_page_shortcut: 1
   # Time format to show on logs:
   # Full date time: "%Y-%m-%d %H:%M:%S"
   time_format: "%m-%d %H:%M"
+
+# 50, 75 e 100
+ship_work_percent: 75
 
 
 heroes_work_mod:
@@ -30,6 +33,10 @@ heroes_work_mod:
 
 
 screen:
+  refresh_ships: 25
+
+  n_ships_to_fight: 10
+
   # Number of login attempts
   number_login_attempts: 3
 
@@ -50,12 +57,12 @@ screen:
   #   false: Just chest screen with your coins
   print_full_screen: false
 
-  scroll_heroes:
+  scroll:
     # total number of times the screen scrolls down
-    repeat: 3
+    repeat: 0
 
     # distance when scrolling down
-    distance: -375
+    distance: -175
 
     # duration of scrolling
     duration: 2 
@@ -69,7 +76,7 @@ telegram:
   chat_id: 0
 
   # Timer when your chest image is sent to telegram
-  refresh_print_chest: 60
+  refresh_print_token: 60
   
 
 # xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -77,5 +84,5 @@ telegram:
 # ------------------------
 threshold:
   default: 0.7
-  hero_to_work: 0.9
+  to_work: 0.9
 # xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx

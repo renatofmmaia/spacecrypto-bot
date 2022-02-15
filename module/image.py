@@ -66,8 +66,7 @@ class Image:
 
     def print_full_screen(image_name: str, target):
         image_name = f'{image_name}.png'
-        monitor_screen = Image.get_monitor_with_target(target)
-        image = pyautogui.screenshot(region=(monitor_screen))
+        image = pyautogui.screenshot()
         image.save(image_name)
         return image_name
         
@@ -79,11 +78,13 @@ class Image:
         return image_name
 
     def get_target_positions(target:str, screen_image = None, threshold:float=0.8, not_target:str=None):
-        threshold_config = Config.PROPERTIES["threshold"]["hero_to_work"]
+        threshold_config = Config.PROPERTIES["threshold"]["to_work"]
         if(threshold_config):
             threshold = threshold_config
             
         target_img = Image.TARGETS[target]
+        height, width = target_img.shape[:2]
+
         screen_img = Image.screen() if screen_image is None else screen_image
         result = cv2.matchTemplate(screen_img, target_img, cv2.TM_CCOEFF_NORMED)
 
@@ -94,8 +95,21 @@ class Image:
 
         y_result, x_result = np.where( result >= threshold)
         
+        results_len = len(x_result)
+        del_index = []
+        for i in range(1, results_len):
+            x = x_result[i]
+            y = y_result[i]
+            x_range = x_result[i-1], x_result[i-1]+width
+            y_range = y_result[i-1], y_result[i-1]+height
+
+            if x_range[0] <= x <= x_range[1] and y_range[0] <= y <= y_range[1]:
+                del_index.append(i)
+
+        y_result = np.delete(y_result, del_index)
+        x_result = np.delete(x_result, del_index)
+
         
-        height, width = target_img.shape[:2]
         targets_positions = []
         for (x,y) in zip(x_result, y_result):
             x += Image.MONITOR_LEFT
@@ -103,6 +117,12 @@ class Image:
             targets_positions.append([x,y,width,height])
             
         return targets_positions
+
+    def get_first_target_position(target:str, screen_image = None, threshold:float=0.8, not_target:str=None):
+        positions = Image.get_target_positions(target, screen_image, threshold, not_target)
+        if len(positions) == 0:
+            return None
+        return positions[0]
     
     def get_one_target_position(target:str, threshold:float=0.8):
         threshold_config = Config.get("threshold", "default")

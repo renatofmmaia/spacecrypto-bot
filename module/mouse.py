@@ -96,3 +96,11 @@ def scroll_and_click_on_targets(safe_scroll_target: str, repeat: int, distance:f
         res.append(function_between())    
     
     return res
+
+def scroll(safe_scroll_target: str, distance:float, duration: float, wait:float):
+    move_to(safe_scroll_target)
+    pyautogui.mouseDown(duration=0.1)
+    pyautogui.moveRel(0, distance, duration)
+    time.sleep(0.3)
+    pyautogui.mouseUp(duration=0.1)
+    time.sleep(wait)

@@ -3,18 +3,18 @@ import subprocess
 from module.platform import Platform, PlatformEnum
 
 
-def get_windows():
+def get_windows(title:str):
     return (
-        _get_linux_bombcrypto_windows()
+        _get_linux_bombcrypto_windows(title)
         if Platform().get_platform() == PlatformEnum.LINUX
-        else _get_bombcrypto_windows()
+        else _get_bombcrypto_windows(title)
     )
 
 
-def _get_linux_bombcrypto_windows():
+def _get_linux_bombcrypto_windows(title):
     stdout = (
         subprocess.Popen(
-            "xdotool search --name bombcrypto", shell=True, stdout=subprocess.PIPE
+            f"xdotool search --name {title}", shell=True, stdout=subprocess.PIPE
         )
         .communicate()[0]
         .decode("utf-8")
@@ -23,10 +23,10 @@ def _get_linux_bombcrypto_windows():
     windows = stdout.split("\n")
     return [LinuxWindow(w) for w in windows]
 
-def _get_bombcrypto_windows():
+def _get_bombcrypto_windows(title):
     import pygetwindow
 
-    return [DefaultWindow(w) for w in pygetwindow.getWindowsWithTitle("bombcrypto")]
+    return [DefaultWindow(w) for w in pygetwindow.getWindowsWithTitle(title)]
 
 class LinuxWindow:
     def __init__(self, window_id) -> None:
