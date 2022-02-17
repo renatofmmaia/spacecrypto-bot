@@ -18,6 +18,7 @@ class SpaceScreenEnum(Enum):
     SHIP = 2
     HUNTING = 3
     BASE = 4
+    LOSE = 5
     
 
 class SpaceScreen:
@@ -60,6 +61,7 @@ class SpaceScreen:
             SpaceScreenEnum.LOGIN.value: Image.TARGETS["identify_login"],
             SpaceScreenEnum.BASE.value: Image.TARGETS["identify_base"],
             SpaceScreenEnum.HUNTING.value: Image.TARGETS["identify_hunting"],
+            SpaceScreenEnum.LOSE.value: Image.TARGETS["identify_lose"],
             SpaceScreenEnum.POPUP_ERROR.value: Image.TARGETS["popup_erro"],
         }
         max_value = 0
@@ -79,6 +81,14 @@ class SpaceScreen:
         current_screen = SpaceScreen.get_current_screen()
         if current_screen == SpaceScreenEnum.HOME.value:
             return
+        elif current_screen == SpaceScreenEnum.LOSE.value:
+            click_when_target_appears("button_confirm_without_time")
+            if not click_when_target_appears("button_hunt_ships"):
+                Login.do_login(manager)
+        elif current_screen == SpaceScreenEnum.HUNTING.value:
+            logger_translated("Space Ships", LoggerEnum.BUTTON_CLICK)
+            if not click_when_target_appears("button_hunt_ships"):
+                Login.do_login(manager)
         else:
             Login.do_login(manager)
             return
@@ -96,7 +106,7 @@ class SpaceScreen:
             logger(str(e))
             logger("😬 Ohh no! We couldn't send your farm report to Telegram.", color="yellow", force_log_file=True)
         
-        manager.set_refresh_timer("refresh_print_chest")
+        manager.set_refresh_timer("refresh_print_token")
     
 class Login:
     def do_login(manager):
@@ -157,6 +167,7 @@ class Ship:
         
     def keep_working(manager):
         logger_translated(f"Ships keeping work", LoggerEnum.ACTION)
+        
         current_screen = SpaceScreen.get_current_screen()
         
         if current_screen != SpaceScreenEnum.HOME.value:
@@ -200,7 +211,10 @@ class Ship:
 
         logger(f"Sending ships to fight:")
         
-        while scroll_times <= (Config.get('screen','scroll', 'repeat')) or n_ships < Config.get('screen','n_ships_to_fight'):
+        while scroll_times <= (Config.get('screen','scroll', 'repeat')):
+            if n_ships >= Config.get('screen','n_ships_to_fight'):
+                break
+            
             screen_img = Image.screen()
             
             buttons_position = Image.get_target_positions("button_fight_on", not_target="button_fight_off", screen_image=screen_img)
@@ -223,9 +237,8 @@ class Ship:
             if click_first(buttons_position):
                 n_ships +=1
                 continue
-
-        click_when_target_appears('btn_fight_boss')
         
+        click_when_target_appears('btn_fight_boss')
         click_when_target_appears('button_confirm_without_time', 10)    
 
         logger(f"🚀 {n_ships} new ships sent to explode the boss 💣💣💣.")
