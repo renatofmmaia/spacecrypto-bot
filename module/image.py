@@ -64,7 +64,7 @@ class Image:
         return start_inside_x and finish_inside_x and start_inside_y and finish_inside_y
 
 
-    def print_full_screen(image_name: str, target):
+    def print_full_screen(image_name: str):
         image_name = f'{image_name}.png'
         image = pyautogui.screenshot()
         image.save(image_name)

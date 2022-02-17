@@ -18,7 +18,7 @@ generals:
   time_format: "%m-%d %H:%M"
 
 # 50, 75 e 100
-ship_work_percent: 75
+ship_work_percent: 50
 
 
 heroes_work_mod:
@@ -59,7 +59,7 @@ screen:
 
   scroll:
     # total number of times the screen scrolls down
-    repeat: 0
+    repeat: 5
 
     # distance when scrolling down
     distance: -175

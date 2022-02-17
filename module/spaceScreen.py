@@ -59,6 +59,7 @@ class SpaceScreen:
             SpaceScreenEnum.HOME.value: Image.TARGETS["identify_home"],
             SpaceScreenEnum.LOGIN.value: Image.TARGETS["identify_login"],
             SpaceScreenEnum.BASE.value: Image.TARGETS["identify_base"],
+            SpaceScreenEnum.HUNTING.value: Image.TARGETS["identify_hunting"],
             SpaceScreenEnum.POPUP_ERROR.value: Image.TARGETS["popup_erro"],
         }
         max_value = 0
@@ -199,18 +200,13 @@ class Ship:
 
         logger(f"Sending ships to fight:")
         
-        while scroll_times <= (Config.get('screen','scroll', 'repeat')) and n_ships < Config.get('screen','n_ships_to_fight'):
+        while scroll_times <= (Config.get('screen','scroll', 'repeat')) or n_ships < Config.get('screen','n_ships_to_fight'):
             screen_img = Image.screen()
             
             buttons_position = Image.get_target_positions("button_fight_on", not_target="button_fight_off", screen_image=screen_img)
             
             if not buttons_position:
-                scroll( 
-                    safe_scroll_target="ship_bar_vertical",
-                    distance=Config.get('screen','scroll', 'distance'),
-                    duration=Config.get('screen','scroll', 'duration'),
-                    wait=Config.get('screen','scroll', 'wait'),
-                )
+                Ship.scroll_screen()
                 scroll_times += 1
                 continue 
 
@@ -227,17 +223,19 @@ class Ship:
             if click_first(buttons_position):
                 n_ships +=1
                 continue
-            
-            scroll( 
-                safe_scroll_target="ship_bar_vertical",
-                distance=Config.get('screen','scroll', 'distance'),
-                duration=Config.get('screen','scroll', 'duration'),
-                wait=Config.get('screen','scroll', 'wait'),
-            )
-            scroll_times += 1
 
         click_when_target_appears('btn_fight_boss')
+        
+        click_when_target_appears('button_confirm_without_time', 10)    
 
-        logger(f"🚀 {sum(n_ships)} new ships sent to explode the boss 💣💣💣.")
+        logger(f"🚀 {n_ships} new ships sent to explode the boss 💣💣💣.")
         manager.set_refresh_timer("refresh_ships")
         return True
+
+    def scroll_screen():
+        scroll( 
+                    safe_scroll_target="ship_bar_vertical",
+                    distance=Config.get('screen','scroll', 'distance'),
+                    duration=Config.get('screen','scroll', 'duration'),
+                    wait=Config.get('screen','scroll', 'wait'),
+                )
