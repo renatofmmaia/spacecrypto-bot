@@ -1,4 +1,7 @@
 import subprocess
+from tkinter import * 
+from tkinter.ttk import *
+from enum import Enum
 
 from module.platform import Platform, PlatformEnum
 
@@ -28,6 +31,16 @@ def _get_bombcrypto_windows(title):
 
     return [DefaultWindow(w) for w in pygetwindow.getWindowsWithTitle(title)]
 
+def get_resolution():
+    root = Tk()
+    width = root.winfo_screenwidth()
+    height = root.winfo_screenheight()
+    
+    if width == 1920 and height == 1080:
+        return WindowsResolutionEnum.FULL_HD
+    else:
+        return WindowsResolutionEnum.NOT_SUPPORTED
+
 class LinuxWindow:
     def __init__(self, window_id) -> None:
         self.window = window_id
@@ -41,3 +54,7 @@ class DefaultWindow:
 
     def activate(self):
         self.window.activate()
+        
+class WindowsResolutionEnum(Enum):
+    FULL_HD = "1920x1080"
+    NOT_SUPPORTED = "NOT_SUPPORTED"

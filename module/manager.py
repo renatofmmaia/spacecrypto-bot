@@ -35,7 +35,7 @@ class Manager:
         if ((check_error) or (refresh_check_error and (now() - self.refresh_check_error > refresh_check_error))):
             Ship.do_check_error(self)
             
-        refresh_ships = Config.get('screen', 'refresh_ships')*60
+        refresh_ships = Config.get('refresh_ships')*60
         if (refresh_ships and (now() - self.refresh_ships > refresh_ships)):
             Ship.keep_working(self)
         

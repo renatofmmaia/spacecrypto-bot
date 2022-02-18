@@ -27,7 +27,7 @@ COLOR = {
 
 def logger(message, color="default", force_log_file=False, terminal=True, datetime=True, end='\n'):
     color_formatted = COLOR.get(color.lower(), COLOR["default"])
-    formatted_datetime = time.strftime(Config.get("generals", "time_format"), time.localtime())
+    formatted_datetime = time.strftime("%m-%d %H:%M", time.localtime())
     
     if datetime:
         formatted_message = "[{}] => {}".format(formatted_datetime, message)

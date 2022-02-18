@@ -151,8 +151,7 @@ class Login:
                     logger("🎉 Login successfully!")
                     logged = True
                     break
-
-        manager.set_refresh_timer("refresh_login")
+                
         return logged
     
 class Ship:
@@ -172,6 +171,8 @@ class Ship:
         
         if current_screen != SpaceScreenEnum.HOME.value:
             SpaceScreen.go_to_home(manager)
+            
+        Ship.remove_ships()
         
         scale_factor = 25
         ship_bar = [
@@ -212,7 +213,7 @@ class Ship:
         logger(f"Sending ships to fight:")
         
         while scroll_times <= (Config.get('screen','scroll', 'repeat')):
-            if n_ships >= Config.get('screen','n_ships_to_fight'):
+            if n_ships >= Config.get('n_ships_to_fight'):
                 break
             
             screen_img = Image.screen()
@@ -220,7 +221,12 @@ class Ship:
             buttons_position = Image.get_target_positions("button_fight_on", not_target="button_fight_off", screen_image=screen_img)
             
             if not buttons_position:
-                Ship.scroll_screen()
+                scroll( 
+                    safe_scroll_target="ship_bar_vertical",
+                    distance=Config.get('screen','scroll', 'distance'),
+                    duration=Config.get('screen','scroll', 'duration'),
+                    wait=Config.get('screen','scroll', 'wait'),
+                )
                 scroll_times += 1
                 continue 
 
@@ -245,10 +251,9 @@ class Ship:
         manager.set_refresh_timer("refresh_ships")
         return True
 
-    def scroll_screen():
-        scroll( 
-                    safe_scroll_target="ship_bar_vertical",
-                    distance=Config.get('screen','scroll', 'distance'),
-                    duration=Config.get('screen','scroll', 'duration'),
-                    wait=Config.get('screen','scroll', 'wait'),
-                )
+    def remove_ships():
+        targets_positions = Image.get_target_positions('button_ship_x')
+        if len(targets_positions) > 0:
+            click_one_target('button_ship_x')
+            Ship.remove_ships()
+            

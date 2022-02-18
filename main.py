@@ -11,12 +11,18 @@ from module.image import Image
 from module.logger import logger, reset_log_file
 from module.manager import create_managers
 from module.telegram import TelegramBot
+from module.window import get_resolution, WindowsResolutionEnum
 
 __version__ = "0.0.3"
 
 
 def main(config_file):
     try:
+        monitor_resolution = get_resolution()
+        if(monitor_resolution == WindowsResolutionEnum.NOT_SUPPORTED):
+            logger("Oh no, your resolution is not supported, this bot only support 1920x1080", color="red", force_log_file=True)
+            quit()
+        
         # Load configs
         Config.load_config(config_file)
         Image.load_targets()
@@ -79,7 +85,7 @@ def main(config_file):
                     color="yellow",
                 )
             sleep(5)
-    except Exception:
+    except Exception as e:
         logger(traceback.format_exc(), color="red", force_log_file=True, terminal=False)
         logger("😬 Ohh no! We couldn't start the bot.", color="red")
 

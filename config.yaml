@@ -1,3 +1,49 @@
+# Time the bot must relocate the ships to farm
+refresh_ships: 25
+
+# Number of ships you want to farm
+n_ships_to_fight: 10
+
+# Percentage at which ships return
+# Accepted values: 50, 75 e 100
+ship_work_percent: 50
+
+# ---------------------------------------------------------
+telegram:
+  # Settings for telegram integration 
+  token: ""
+  chat_id: 0
+
+  # Timer when your chest image is sent to telegram
+  refresh_print_token: 60
+# ---------------------------------------------------------
+
+# ---------------------------------------------------------
+screen:
+  scroll:
+    # Total number of times the screen scrolls down
+    # Every 10 ships, use 3 scrolls. 
+    # Example: 
+    # if u have 10 spaceships: 3 // if u have 20 spaceships: 6 // if u have 30 spaceships: 9 // ETC
+    repeat: 6
+
+    # Distance when scrolling down
+    distance: -175
+
+    # Duration of scrolling
+    duration: 2 
+
+    # Wait time to stop scrolling before checking the heroes on the screen.
+    wait: 1
+  
+  # Number of login attempts
+  number_login_attempts: 3
+
+  # Timer to check popup screen errors, if it's in error, restarts with login again
+  refresh_check_error: 5
+# ---------------------------------------------------------
+
+# ---------------------------------------------------------
 generals:
   # Save all logs in file logs/logger.txt
   #   0: Don't save log
@@ -13,70 +59,7 @@ generals:
   #   1: CTRL + F5
   #   2: CTRL + SHIFT + R
   refresh_page_shortcut: 1
-  # Time format to show on logs:
-  # Full date time: "%Y-%m-%d %H:%M:%S"
-  time_format: "%m-%d %H:%M"
-
-# 50, 75 e 100
-ship_work_percent: 50
-
-
-heroes_work_mod:
-  # Properties that identifies heroes to work according rarity and life %;
-  #   Available options: 0, 10, 20, 30, 40, 50, 60, 70, 80, 90 or 100.
-  Common: 60
-  Rare: 40
-  SuperRare: 30
-  Epic: 30
-  Legend: 30
-  SuperLegend: 30
-
-
-screen:
-  refresh_ships: 25
-
-  n_ships_to_fight: 10
-
-  # Number of login attempts
-  number_login_attempts: 3
-
-  # Time to update hero positions on farm screen
-  refresh_hunt: 7
-
-  # Timer to check who needs to go back to work
-  refresh_heroes: 25
-
-  # Timer to force browser refresh, prevent indestructible blocks and other possibles errors
-  refresh_login: 60
-
-  # Timer to check popup screen errors, if it's in error, restarts with login again
-  refresh_check_error: 5
-
-  # Chest photo type, for sending via Telegram
-  #   true: The entire screen where the browser tab will be
-  #   false: Just chest screen with your coins
-  print_full_screen: false
-
-  scroll:
-    # total number of times the screen scrolls down
-    repeat: 5
-
-    # distance when scrolling down
-    distance: -175
-
-    # duration of scrolling
-    duration: 2 
-
-    # Wait time to stop scrolling before checking the heroes on the screen.
-    wait: 1
-
-telegram:
-  # Settings for telegram integration 
-  token: ""
-  chat_id: 0
-
-  # Timer when your chest image is sent to telegram
-  refresh_print_token: 60
+# ---------------------------------------------------------
   
 
 # xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
