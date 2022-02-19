@@ -201,17 +201,17 @@ class Image:
             
         user_interface_percent = round(abs(((im_fh_w - im_user_w) / im_fh_w) * 100))
         
-        path_user_by_resolution = f'./assets/images/targets_{user_interface_percent}'
+        path_user_by_resolution = f'./assets/images/targets_user_{user_interface_percent}'
         
-        if path.exists(path_user_by_resolution):
-            return user_interface_percent
-        
-        mkdir(path_user_by_resolution)
-        
-        for image_name in Image.TARGETS:            
-            image = PIL.Image.open(f'./assets/images/targets/{image_name}.png')
-            h = round(abs(np.array(image).shape[0] - (np.array(image).shape[0] * user_interface_percent) / 100))
-            w = round(abs(np.array(image).shape[1] - (np.array(image).shape[1] * user_interface_percent) / 100))
-            image = image.resize((w,h), PIL.Image.ANTIALIAS)
-            image.save(f'{path_user_by_resolution}/{image_name}.png')
+        if not path.exists(path_user_by_resolution):
+            mkdir(path_user_by_resolution)
+            
+            for image_name in Image.TARGETS:            
+                image = PIL.Image.open(f'./assets/images/targets/{image_name}.png')
+                h = round(abs(np.array(image).shape[0] - (np.array(image).shape[0] * user_interface_percent) / 100))
+                w = round(abs(np.array(image).shape[1] - (np.array(image).shape[1] * user_interface_percent) / 100))
+                image = image.resize((w,h), PIL.Image.ANTIALIAS)
+                image.save(f'{path_user_by_resolution}/{image_name}.png')
+            
+        return user_interface_percent
       
