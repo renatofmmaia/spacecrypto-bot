@@ -21,9 +21,9 @@ Smart Chain Wallet(BUSD/BNB/SPG/SPE)
 # Como utilizar
 ###  Requisitos:
 - Instalação do Python, instale pelo [site oficial](https://www.python.org/downloads/) ou pela [windows store](https://www.microsoft.com/p/python-37/9nj46sx7x90p?activetab=pivot:overviewtab) durante a instalação do python, não se esqueça de marcar a opção add Python to Path.
-- ![Path Python](https://github.com/renatofmmaia/spacecrypto-bot/blob/master/assets/infos_and_tutorial/python_path.png)
+- ![Path Python](https://github.com/renatofmmaia/spacecrypto-bot/blob/main/assets/infos_and_tutorial/python_path.png)
 - Realizar download do bot, clicando em Code -> Download Zip
-- ![download do bot](https://github.com/renatofmmaia/spacecrypto-bot/blob/master/assets/infos_and_tutorial/bot_download.png)
+- ![download do bot](https://github.com/renatofmmaia/spacecrypto-bot/blob/main/assets/infos_and_tutorial/bot_download.png)
 - Descompactar o bot na pasta em que desejar
 - (Linux) Instalar o pacote xdtools (responsável por retornar as janelas de navegador no linux) através do comando: sudo apt-get install xdotool
 - (Linux) Instalar pacote Scrot (responsável pela printscreen no linux) através do comando: sudo apt-get install scrot
@@ -56,9 +56,9 @@ repeat = Total de scroll(rolagem) que o bot vai fazer, para encontrar as naves p
 - Com o grupo criado, acesse o link a seguir, alterando o TOKEN na url, pelo o que você acabou de criar: https://api.telegram.org/botSEUTOKEN/getUpdates
 - Vai ser exibido na tela um JSON, procure por "chat":"id", geralmente esse valor começa com o sinal de menos(-) e altere no arquivo config.yaml chat_id.
 - Exemplo chat_id
-- ![chatid](https://github.com/renatofmmaia/spacecrypto-bot/blob/master/assets/infos_and_tutorial/chat_id.png)
+- ![chatid](https://github.com/renatofmmaia/spacecrypto-bot/blob/main/assets/infos_and_tutorial/chat_id.png)
 - Config.yaml que você tem que configurar
-- ![config trelegram](https://github.com/renatofmmaia/spacecrypto-bot/blob/master/assets/infos_and_tutorial/token_chat_id.png)
+- ![config trelegram](https://github.com/renatofmmaia/spacecrypto-bot/blob/main/assets/infos_and_tutorial/token_chat_id.png)
 
 ### Possíveis soluções
 - Mantenha a tela do navegador maximizada e a resolução do monitor preferencialmente em 1920x1080.
