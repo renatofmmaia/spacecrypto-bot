@@ -26,11 +26,11 @@ def click_on_multiple_targets(target: str, not_click:str= None, filter_func = No
     
     return click_count    
 
-def click_one_target(target: str):
+def click_one_target(target: str, target_global: bool = False):
     """click in a target. Returns number of clicks"""
     result = None
     try:
-        x_left, y_top, w, h = Image.get_one_target_position(target)
+        x_left, y_top, w, h = Image.get_one_target_position(target, target_global=target_global)
         x, y, move_duration, click_duration, time_between  = randomize_values(x_left, w, y_top, h)
         pyautogui.moveTo(x, y, duration=move_duration, tween=pyautogui.easeOutQuad)
         time.sleep(time_between)
@@ -49,14 +49,14 @@ def click_randomly_in_position(x, y, w, h):
     pyautogui.click(duration=click_duration)
 
 
-def click_when_target_appears(target: str, time_beteween: float = 0.5, timeout: float = 10):
+def click_when_target_appears(target: str, time_beteween: float = 0.5, timeout: float = 10, target_global = False):
     """ Click in a target when it appears.
         It will check for target every `time_beteween` seconds.
         After timeout seconds it will return 0 if no target was found.
         Returns 1 if target was found.
     """
     
-    return do_with_timeout(click_one_target, args = [target])
+    return do_with_timeout(click_one_target, args = [target, target_global])
 
 
 def randomize_values(x, w, y, h):

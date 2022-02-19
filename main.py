@@ -1,6 +1,8 @@
 import sys
 import traceback
 from time import sleep
+import numpy as np
+import PIL
 
 import requests
 from packaging import version
@@ -18,15 +20,19 @@ __version__ = "0.0.3"
 
 def main(config_file):
     try:
-        monitor_resolution = get_resolution()
-        if(monitor_resolution == WindowsResolutionEnum.NOT_SUPPORTED):
-            logger("Oh no, your resolution is not supported, this bot only support 1920x1080", color="red", force_log_file=True)
-            quit()
+        # monitor_resolution = get_resolution()
+        # if(monitor_resolution == WindowsResolutionEnum.NOT_SUPPORTED):
+        #     logger("Oh no, your resolution is not supported, this bot only support 1920x1080", color="red", force_log_file=True)
+        #     quit()
         
         # Load configs
         Config.load_config(config_file)
-        Image.load_targets()
         TelegramBot.load_config()
+        Image.load_targets_global()
+        Image.load_targets_default()
+        user_interface_percent = Image.set_images_resolution()
+        Image.load_targets_user(user_interface_percent)
+        
         
         # if Config.get("generals", "reset_log_file"):
         #     reset_log_file()

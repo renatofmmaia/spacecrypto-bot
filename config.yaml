@@ -4,6 +4,9 @@ refresh_ships: 25
 # Number of ships you want to farm
 n_ships_to_fight: 10
 
+# Minimum number to start a battle
+n_minimum_ships_to_fight: 10
+
 # Percentage at which ships return
 # Accepted values: 50, 75 e 100
 ship_work_percent: 50

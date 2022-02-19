@@ -1,4 +1,4 @@
-from os import listdir
+from os import listdir, path, mkdir
 from turtle import width
 
 import mss
@@ -13,14 +13,35 @@ from .utils import *
 
 class Image:
     TARGETS = []
+    TARGETS_GLOBAL = []
     MONITOR_LEFT = None
     MONITOR_TOP = None
+    
+    def load_targets_global():
+        path = "assets/images/targets_global/"
+        file_names = listdir(path)
 
-    @staticmethod
-    def load_targets():
+        targets = {}
+        for file in file_names:
+            targets[replace(file, ".png")] = cv2.imread(path + file)
+
+        Image.TARGETS_GLOBAL = targets
+
+    def load_targets_default():
         path = "assets/images/targets/"
         file_names = listdir(path)
 
+        targets = {}
+        for file in file_names:
+            targets[replace(file, ".png")] = cv2.imread(path + file)
+
+        Image.TARGETS = targets
+    
+    def load_targets_user(user_interface_percent):
+        path = f"assets/images/targets_user_{user_interface_percent}/"
+        file_names = listdir(path)
+
+        Image.TARGETS = []
         targets = {}
         for file in file_names:
             targets[replace(file, ".png")] = cv2.imread(path + file)
@@ -124,12 +145,12 @@ class Image:
             return None
         return positions[0]
     
-    def get_one_target_position(target:str, threshold:float=0.8):
+    def get_one_target_position(target:str, threshold:float=0.8, target_global = False):
         threshold_config = Config.get("threshold", "default")
         if(threshold_config):
             threshold = threshold_config
             
-        target_img = Image.TARGETS[target]
+        target_img = Image.TARGETS_GLOBAL[target] if target_global else Image.TARGETS[target]
         screen_img = Image.screen()
         result = cv2.matchTemplate(screen_img, target_img, cv2.TM_CCOEFF_NORMED)
 
@@ -167,4 +188,30 @@ class Image:
         screen_img = Image.screen()[y:y+h+y_increment,:]
         result = Image.get_target_positions("hero_bar_green", screen_image=screen_img)
         return len(result) > 0
+    
+    def set_images_resolution():
+        im_fh = np.array(Image.TARGETS_GLOBAL['screen_full_hd'])
+        im_fh_w = im_fh.shape[1]
+        im_user = np.array(Image.TARGETS_GLOBAL['screen_user'])
+        im_user_w = im_user.shape[1]
+        
+        if(im_user_w > im_fh_w):
+            logger("Unfortunately your monitor resolution is not supported, please contact our support.")
+            quit()
+            
+        user_interface_percent = round(abs(((im_fh_w - im_user_w) / im_fh_w) * 100))
+        
+        path_user_by_resolution = f'./assets/images/targets_{user_interface_percent}'
+        
+        if path.exists(path_user_by_resolution):
+            return user_interface_percent
+        
+        mkdir(path_user_by_resolution)
+        
+        for image_name in Image.TARGETS:            
+            image = PIL.Image.open(f'./assets/images/targets/{image_name}.png')
+            h = round(abs(np.array(image).shape[0] - (np.array(image).shape[0] * user_interface_percent) / 100))
+            w = round(abs(np.array(image).shape[1] - (np.array(image).shape[1] * user_interface_percent) / 100))
+            image = image.resize((w,h), PIL.Image.ANTIALIAS)
+            image.save(f'{path_user_by_resolution}/{image_name}.png')
       
