@@ -11,8 +11,8 @@ ship_work_percent: 50
 # ---------------------------------------------------------
 telegram:
   # Settings for telegram integration 
-  token: ""
-  chat_id: 0
+  token: "5001617128:AAESdQINYVw_InsvRRCS9SLkbPE0mEDWiw4"
+  chat_id: -788793629
 
   # Timer when your chest image is sent to telegram
   refresh_print_token: 60
