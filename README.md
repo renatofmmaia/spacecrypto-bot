@@ -40,10 +40,11 @@ Smart Chain Wallet(BUSD/BNB/SPG/SPE)
 ###  Configurando o Bot
 - Todas as configurações do bot são realizadas através do arquivo config.yaml
 - Configs importantes que você deve se atentar:
-refresh_ships = Tempo em que o bot aguarda antes de realocar as navas para um novo farmar.
-n_ships_to_fight = Número de naves que você quer enviar sempre que for iniciar uma nova luta com o boss.
-ship_work_percent = Porcentagem em que o bot vai usar como referência na hora de enviar suas naves, atualmente apenas é permitido os valores (50, 75 ou 100)%.
-repeat = Total de scroll(rolagem) que o bot vai fazer, para encontrar as naves para farmar, a base de referência é a cada 10 naves, incrementar 3 no valor total, exemplo: 10 spaceships: 3 // 20 spaceships: 6 // 30 spaceships: 9 // ETC
+----------------------------------
+- refresh_ships = Tempo em que o bot aguarda antes de realocar as navas para um novo farmar.
+- **n_ships_to_fight** = Número de naves que você quer enviar sempre que for iniciar uma nova luta com o boss.
+- **ship_work_percent** = Porcentagem em que o bot vai usar como referência na hora de enviar suas naves, atualmente apenas é permitido os valores (50, 75 ou 100)%.
+- **repeat** = Total de scroll(rolagem) que o bot vai fazer, para encontrar as naves para farmar, a base de referência é a cada 10 naves, incrementar 3 no valor total, exemplo: 10 spaceships: 3 // 20 spaceships: 6 // 30 spaceships: 9 // ETC
 
 
 ###  Configurando Telegram
