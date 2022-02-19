@@ -27,8 +27,8 @@ screen:
     # Total number of times the screen scrolls down
     # Every 10 ships, use 3 scrolls. 
     # Example: 
-    # if u have 10 spaceships: 3 // if u have 20 spaceships: 6 // if u have 30 spaceships: 9 // ETC
-    repeat: 6
+    # if u have 10 spaceships: 4 // if u have 20 spaceships: 8 // if u have 30 spaceships: 12 // ETC
+    repeat: 8
 
     # Distance when scrolling down
     distance: -175
