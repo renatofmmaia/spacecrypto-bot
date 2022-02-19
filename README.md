@@ -47,7 +47,7 @@ repeat = Total de scroll(rolagem) que o bot vai fazer, para encontrar as naves p
 
 
 ###  Configurando Telegram
-- Em seu telegram, iniciei uma conversa com @BotFather
+- Em seu telegram, inicie uma conversa com @BotFather
 - Clique em Start, e quando abrir as opções, clique em "/newbot"
 - Em seguida informe um nome e depois um username para o bot, lembrando que username tem que terminar com "_bot" no final, exemplo "meubomb_bot"
 - Finalizando você vai ver uma mensagem contendo os dados do bot que vc criou, copie o Token e insira no arquivo de configuração, config.yaml
