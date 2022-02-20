@@ -301,8 +301,11 @@ class Ship:
 
 
         if n_ships < Config.get('n_minimum_ships_to_fight'):
+            logger(f"🚫 Not enough ships to fight, restarting...")
             Ship.remove_ships()
             manager.set_recharge()
+            SpaceScreen.go_to_fight(manager)
+            SpaceScreen.go_to_home(manager)
             manager.set_refresh_timer("refresh_ships")
             return False
 
