@@ -31,7 +31,7 @@ Smart Chain Wallet(BUSD/BNB/SPG/SPE)
 - Abra um terminal, se for windows (aperte a tecla do windows + r e digite "cmd").
 - Navegue até a pasta onde o bot foi extraído, exemplo: cd "C:\spacecrypto-bot".
 - Instale as dependências do bot executando o comando, sem aspas: Windows: "pip install -r requirements.txt" // Linux: "pip3 install -r requirements.txt".
-- **IMPORTANTE:** Seu navegador não pode estar com ZOOM, pois o bot usa reconhecimento de imagem e o tamanho e proporção dos objetos fazem diferença e deve estar sempre MAXIMOZADO, ou seja, tela cheia.
+- **IMPORTANTE:** Seu navegador não pode estar com ZOOM, pois o bot usa reconhecimento de imagem e o tamanho e proporção dos objetos fazem diferença e deve estar sempre MAXIMIZADO, ou seja, tela cheia.
 - Faça o primeiro acesso na sua metamask, pois o bot realiza o login apenas se a mesma já estiver conectada.
 - Execute o bot executando o cmando, sem aspas: "python main.py"
 - Enjoy the moment :D
