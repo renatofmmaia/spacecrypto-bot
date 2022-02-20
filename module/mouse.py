@@ -42,6 +42,11 @@ def click_one_target(target: str, target_global: bool = False):
     
     return result
 
+def click_in_one_of_targets(targets: list, target_global: bool = False):
+    for target in targets:
+        if click_one_target(target):
+            return True
+
 def click_randomly_in_position(x, y, w, h):
     x, y, move_duration, click_duration, time_between  = randomize_values(x, w, y, h)
     pyautogui.moveTo(x, y, duration=move_duration, tween=pyautogui.easeOutQuad)
@@ -55,9 +60,10 @@ def click_when_target_appears(target: str, time_beteween: float = 0.5, timeout: 
         After timeout seconds it will return 0 if no target was found.
         Returns 1 if target was found.
     """
-    
     return do_with_timeout(click_one_target, args = [target, target_global])
 
+def click_when_one_of_targets_appears(targets: list, time_beteween: float = 0.5, timeout: float = 10, target_global = False):
+    return do_with_timeout(click_in_one_of_targets, args = [targets, target_global])
 
 def randomize_values(x, w, y, h):
     x_rand = randomize_int(x, w, 0.20)

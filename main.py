@@ -30,8 +30,7 @@ def main(config_file):
         TelegramBot.load_config()
         Image.load_targets_global()
         Image.load_targets_default()
-        user_interface_percent = Image.set_images_resolution()
-        Image.load_targets_user(user_interface_percent)
+        Image.load_targets_user()
         
         
         # if Config.get("generals", "reset_log_file"):

@@ -37,8 +37,9 @@ class Image:
 
         Image.TARGETS = targets
     
-    def load_targets_user(user_interface_percent):
-        path = f"assets/images/targets_user_{user_interface_percent}/"
+    def load_targets_user():
+        Image.set_images_resolution()
+        path = f"assets/images/targets_user/"
         file_names = listdir(path)
 
         Image.TARGETS = []
@@ -145,13 +146,13 @@ class Image:
             return None
         return positions[0]
     
-    def get_one_target_position(target:str, threshold:float=0.8, target_global = False):
+    def get_one_target_position(target:str, threshold:float=0.8, target_global = False, screen_image = None):
         threshold_config = Config.get("threshold", "default")
         if(threshold_config):
             threshold = threshold_config
             
         target_img = Image.TARGETS_GLOBAL[target] if target_global else Image.TARGETS[target]
-        screen_img = Image.screen()
+        screen_img = Image.screen() if screen_image is None else screen_image
         result = cv2.matchTemplate(screen_img, target_img, cv2.TM_CCOEFF_NORMED)
 
         if result.max() < threshold:
@@ -164,11 +165,11 @@ class Image:
         
         return xloc[0], yloc[0], width, height
 
-    def get_max_result_between(targets:list, y_limits=None, x_limits=None, threshold:float=0):
+    def get_max_result_between(targets:list, y_limits=None, x_limits=None, threshold:float=0, screen_img=None):
         index = 0
         max_result = 0
         for i, target in enumerate(targets):
-            screen = Image.screen()
+            screen = Image.screen() if screen_img is None else screen_img
             if y_limits is not None:
                 screen= screen[y_limits[0]:y_limits[1], :]
             if x_limits is not None:
@@ -195,23 +196,23 @@ class Image:
         im_user = np.array(Image.TARGETS_GLOBAL['screen_user'])
         im_user_w = im_user.shape[1]
         
-        if(im_user_w > im_fh_w):
-            logger("Unfortunately your monitor resolution is not supported, please contact our support.")
-            quit()
+        # if(im_user_w > im_fh_w):
+        #     logger("Unfortunately your monitor resolution is not supported, please contact our support.")
+        #     quit()
             
-        user_interface_percent = round(abs(((im_fh_w - im_user_w) / im_fh_w) * 100))
+        user_interface_percent = abs(((im_fh_w - im_user_w) / im_fh_w) * 100)
         
-        path_user_by_resolution = f'./assets/images/targets_user_{user_interface_percent}'
+        path_user_by_resolution = f'./assets/images/targets_user'
         
         if not path.exists(path_user_by_resolution):
             mkdir(path_user_by_resolution)
             
-            for image_name in Image.TARGETS:            
-                image = PIL.Image.open(f'./assets/images/targets/{image_name}.png')
-                h = round(abs(np.array(image).shape[0] - (np.array(image).shape[0] * user_interface_percent) / 100))
-                w = round(abs(np.array(image).shape[1] - (np.array(image).shape[1] * user_interface_percent) / 100))
-                image = image.resize((w,h), PIL.Image.ANTIALIAS)
-                image.save(f'{path_user_by_resolution}/{image_name}.png')
+        for image_name in Image.TARGETS:            
+            image = PIL.Image.open(f'./assets/images/targets/{image_name}.png')
+            h = round(abs(np.array(image).shape[0] - (np.array(image).shape[0] * user_interface_percent) / 100))
+            w = round(abs(np.array(image).shape[1] - (np.array(image).shape[1] * user_interface_percent) / 100))
+            image = image.resize((w,h), PIL.Image.ANTIALIAS)
+            image.save(f'{path_user_by_resolution}/{image_name}.png')
             
         return user_interface_percent
       

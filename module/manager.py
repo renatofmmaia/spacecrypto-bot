@@ -6,11 +6,15 @@ from .mouse import *
 from .utils import *
 from .window import get_windows
 from .config import Config
-
+from enum import Enum
 
 def create_managers():
     return [Manager(w) for w in get_windows("Space Crypto")]
 
+class StateEnum(Enum):
+    STARTING = 0,
+    FIGHTING = 1,
+    RECHARGE = 2,
 
 class Manager:
     def __init__(self, window) -> None:
@@ -18,6 +22,8 @@ class Manager:
         self.refresh_check_error = 0
         self.refresh_ships = 0
         self.refresh_print_token = 0
+        self.state = StateEnum.STARTING
+
 
     def __enter__(self):
         self.window.activate()
@@ -34,7 +40,9 @@ class Manager:
         refresh_check_error = Config.get('screen', 'refresh_check_error')*60
         if ((check_error) or (refresh_check_error and (now() - self.refresh_check_error > refresh_check_error))):
             Ship.do_check_error(self)
-            
+
+        Ship.check_lose(self)    
+
         refresh_ships = Config.get('refresh_ships')*60
         if (refresh_ships and (now() - self.refresh_ships > refresh_ships)):
             Ship.keep_working(self)
@@ -49,3 +57,20 @@ class Manager:
     def set_refresh_timer(self, propertie_name):
         setattr(self, propertie_name, time.time())
 
+    @property
+    def is_starting(self):
+        return self.state == StateEnum.STARTING
+    
+    def set_fighting(self):
+        self.state = StateEnum.FIGHTING
+
+    @property
+    def is_fighting(self):
+        return self.state == StateEnum.FIGHTING
+    
+    def set_recharge(self):
+        self.state = StateEnum.RECHARGE
+
+    @property
+    def is_recharging(self):
+        return self.state == StateEnum.RECHARGE
