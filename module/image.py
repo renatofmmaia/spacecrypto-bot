@@ -192,13 +192,12 @@ class Image:
     
     def set_images_resolution():
         im_fh = np.array(Image.TARGETS_GLOBAL['screen_full_hd'])
-        im_fh_h, im_fh_w = im_fh.shape[:2]
+        diag_fh = (im_fh.shape[0]**2 + im_fh.shape[1]**2)**0.5
         
         im_user = np.array(Image.TARGETS_GLOBAL['screen_user'])
-        im_user_h, im_user_w = im_user.shape[:2]
+        diag_user = (im_user.shape[0]**2 + im_user.shape[1]**2)**0.5
             
-        user_interface_percent_w = (im_user_w / im_fh_w)
-        user_interface_percent_h = (im_user_h / im_fh_h)
+        user_interface_percent = (diag_user / diag_fh)
         
         path_user_by_resolution = f'./assets/images/targets_user'
         
@@ -207,8 +206,8 @@ class Image:
             
         for image_name in Image.TARGETS:            
             image = PIL.Image.open(f'./assets/images/targets/{image_name}.png')
-            h = round(np.array(image).shape[0] * user_interface_percent_h)
-            w = round(np.array(image).shape[1] * user_interface_percent_w)
+            h = round(np.array(image).shape[0] * user_interface_percent)
+            w = round(np.array(image).shape[1] * user_interface_percent)
             image = image.resize((w,h), PIL.Image.ANTIALIAS)
             image.save(f'{path_user_by_resolution}/{image_name}.png')
 
