@@ -3,7 +3,7 @@ Bot desenvolvido em python, 100% do código é aberto, para aqueles que tenham c
 O bot em constante atualização, e para que ele continue 100% free, não deixei de realizar sua contribuição, isso nos motiva a continuar!
 
 # Doações
-Faça seus testes, esta usando e ele te ajuda a otimizar seus ganhos? Mostre seu agradecimento em BUSD/BNB/BCOIN, assim nossa equipe se mantem empenhada em atualizar e trazer novas funcionalidades para a comunidade :relaxed:
+Faça seus testes, esta usando e ele te ajuda a otimizar seus ganhos? Mostre seu agradecimento em BUSD/BNB/SPG/SPE, assim nossa equipe se mantem empenhada em atualizar e trazer novas funcionalidades para a comunidade :relaxed:
 
 Smart Chain Wallet(BUSD/BNB/SPG/SPE) 
 
