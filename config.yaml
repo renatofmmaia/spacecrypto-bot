@@ -2,7 +2,7 @@
 refresh_ships: 25
 
 # Number of ships you want to farm
-n_ships_to_fight: 10
+n_ships_to_fight: 15
 
 # Minimum number to start a battle
 n_minimum_ships_to_fight: 10
@@ -69,6 +69,6 @@ generals:
 # DONT CHANGE THIS CONFIGS
 # ------------------------
 threshold:
-  default: 0.8
+  default: 0.7
   to_work: 0.8
 # xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
