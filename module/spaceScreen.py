@@ -299,7 +299,6 @@ class Ship:
                     if time.time() - start_time > 15:
                         raise Exception(f"Error trying to send {n_ships} ships to fight. Found only {n_found}.")
                     n_found = Ship.get_number_of_ships_in_battle(Image.screen())
-                    time.sleep(0.5)
 
         if n_ships < Config.get('n_minimum_ships_to_fight'):
             Ship.remove_ships()
