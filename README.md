@@ -22,8 +22,7 @@ Smart Chain Wallet(BUSD/BNB/SPG/SPE)
 ###  Requisitos:
 - Instalação do Python, instale pelo [site oficial](https://www.python.org/downloads/) ou pela [windows store](https://www.microsoft.com/p/python-37/9nj46sx7x90p?activetab=pivot:overviewtab) durante a instalação do python, não se esqueça de marcar a opção add Python to Path.
 - ![Path Python](https://github.com/renatofmmaia/spacecrypto-bot/blob/main/assets/infos_and_tutorial/python_path.png)
-- Realizar download do bot, clicando em Code -> Download Zip
-- ![download do bot](https://github.com/renatofmmaia/spacecrypto-bot/blob/main/assets/infos_and_tutorial/bot_download.png)
+- Realizar download da ultima versão do bot em releases do repositorio github, clicando em https://github.com/renatofmmaia/spacecrypto-bot/releases
 - Descompactar o bot na pasta em que desejar
 - (Linux) Instalar o pacote xdtools (responsável por retornar as janelas de navegador no linux) através do comando: sudo apt-get install xdotool
 - (Linux) Instalar pacote Scrot (responsável pela printscreen no linux) através do comando: sudo apt-get install scrot
