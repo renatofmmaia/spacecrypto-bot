@@ -303,6 +303,7 @@ class Ship:
         if n_ships < Config.get('n_minimum_ships_to_fight'):
             Ship.remove_ships()
             manager.set_recharge()
+            manager.set_refresh_timer("refresh_ships")
             return False
 
         click_when_target_appears('btn_fight_boss')
