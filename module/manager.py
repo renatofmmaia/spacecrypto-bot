@@ -42,7 +42,7 @@ class Manager:
             Ship.do_check_error(self)
 
         Ship.check_lose(self)
-        Ship.check_victory(self)    
+        Ship.check_victory(self)
 
         refresh_ships = Config.get('refresh_ships')*60
         if (refresh_ships and (now() - self.refresh_ships > refresh_ships)):

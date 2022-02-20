@@ -294,12 +294,11 @@ class Ship:
             if click_first(buttons_position, search_img):   
                 n_ships +=1
                 start_time = time.time()
-                n_found = Ship.get_number_of_ships_in_battle(Image.screen())
-                while n_found < n_ships:
+                while not Ship.check_number_of_ships(Image.screen(), n_ships):
                     if time.time() - start_time > 15:
-                        raise Exception(f"Error trying to send {n_ships} ships to fight. Found only {n_found}.")
-                    n_found = Ship.get_number_of_ships_in_battle(Image.screen())
-                    time.sleep(0.5)
+                        if not Ship.check_number_of_ships(Image.screen(), n_ships):
+                            raise Exception(f"Error trying to send {n_ships} ships to fight. Found only {n_found}.")
+
 
         if n_ships < Config.get('n_minimum_ships_to_fight'):
             Ship.remove_ships()
@@ -319,21 +318,27 @@ class Ship:
         manager.set_refresh_timer("refresh_ships")
         return True
     
-    def get_number_of_ships_in_battle(screen_img):
-        x, y, w, _ = Image.get_one_target_position("identify_n_space_shipts_in_battle", screen_image=screen_img)
-        h2, w2 = Image.TARGETS["0_ships_in_battle"].shape[:2]
+    def check_number_of_ships(screen_img, n_ships):
+        # CROP SCREEN FROM TEXT 'BATTLE':
+        x, y, w, h = Image.get_one_target_position("identify_n_space_shipts_in_battle_start_area", screen_image=screen_img)
         y_i = y - Image.MONITOR_TOP
-        y_f = y_i + h2
+        y_f = y_i + h
         x_i = x + w - Image.MONITOR_LEFT
-        x_f = x_i + w2
+        search_img = screen_img[y_i:y_f, x_i:]
 
-        search_img = screen_img[y_i:y_f, x_i:x_f, :]
+        # CROP SCREEN BEFORE TEXT '/15':
+        x, y, w, h = Image.get_one_target_position("identify_n_space_shipts_in_battle_end_area", screen_image=search_img)
+        x_f = x - Image.MONITOR_LEFT
+        search_img = search_img[:, :x_f]
 
-        n_ships_list = [f"{i}_ships_in_battle" for i in range(16)]
-
-        max_index = Image.get_max_result_between(n_ships_list, screen_img=search_img)
-        
-        return max_index
+        # SEARCH N SHIPS:
+        #  n_ships_list = [f"{i}_ships_in_battle" for i in range(16)]
+        try:
+            Image.get_one_target_position(f"{n_ships}_ships_in_battle", screen_image=search_img)
+            return True
+        except:
+            return False
+    
 
     def remove_ships():
         targets_positions = Image.get_target_positions('button_ship_x')
