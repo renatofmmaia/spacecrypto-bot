@@ -37,6 +37,7 @@ Smart Chain Wallet(BUSD/BNB/SPG/SPE)
 - Enjoy the moment :D
 
 ###  Configurando o Bot
+- **IMPORTANTE**: Sempre que acontece um erro no bot, ele registra informações do problema no arquivo logs/logger.log, se precisar pedir alguma ajuda, não esqueça de colocar as informações que foram gravas neste arquivo.
 - Para que o bot reconheça sua resolução de tela e seja acertivo em seus comandos, você deve criar uma imagem de qualquer tela do space crypto, porém deve conter apenas a área do jogo, igual demonstrado na imagem abaixo, e salvar na pasta "assets/images/targets_global/" com o nome "screen_user.png":
 ![user_screen](https://github.com/renatofmmaia/spacecrypto-bot/blob/main/assets/images/targets_global/screen_full_hd.png?raw=true)
 ![space_user](https://github.com/renatofmmaia/spacecrypto-bot/blob/main/assets/infos_and_tutorial/space_user.png?raw=true)
