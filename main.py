@@ -15,16 +15,11 @@ from module.manager import create_managers
 from module.telegram import TelegramBot
 from module.window import get_resolution, WindowsResolutionEnum
 
-__version__ = "0.0.3"
+__version__ = "0.0.1"
 
 
 def main(config_file):
-    try:
-        # monitor_resolution = get_resolution()
-        # if(monitor_resolution == WindowsResolutionEnum.NOT_SUPPORTED):
-        #     logger("Oh no, your resolution is not supported, this bot only support 1920x1080", color="red", force_log_file=True)
-        #     quit()
-        
+    try:        
         # Load configs
         Config.load_config(config_file)
         TelegramBot.load_config()
@@ -32,31 +27,30 @@ def main(config_file):
         Image.load_targets_default()
         Image.load_targets_user()
         
-        
-        # if Config.get("generals", "reset_log_file"):
-        #     reset_log_file()
+        if Config.get("generals", "reset_log_file"):
+            reset_log_file()
 
-        # r = requests.get(
-        #     "https://api.github.com/gists/715eabaa3bca5ca70709a6397b806e86"
-        # )
-        # if r.ok:
-        #     data = r.json()
+        r = requests.get(
+            "https://api.github.com/gists/024d69fc0ea70ebf5bde3d26d91776e1"
+        )
+        if r.ok:
+            data = r.json()
 
-        #     start_message = data["files"]["start_message"]["content"]
-        #     logger(start_message, color="cyan", datetime=False)
+            start_message = data["files"]["start_message"]["content"]
+            logger(start_message, color="cyan", datetime=False)
 
-        #     last_version = data["files"]["version"]["content"].strip()
-        #     version_installed = version.parse(__version__)
-        #     logger(f"-> Current version: {version_installed}", color="cyan", datetime=False)
+            last_version = data["files"]["version"]["content"].strip()
+            version_installed = version.parse(__version__)
+            logger(f"-> Current version: {version_installed}", color="cyan", datetime=False)
 
-        #     if version.parse(last_version) > version.parse(__version__):
-        #         logger("-----------------------------------------------", color="green", datetime=False)
-        #         logger(f"New version available: {last_version}.", color="green", datetime=False)
-        #         update_message = data["files"]["update_message"]["content"]
-        #         logger(update_message, color="green", datetime=False)
-        #         logger("-----------------------------------------------", color="green", datetime=False)
-        # else:
-        #     logger("Unable to check for updates.")
+            if version.parse(last_version) > version.parse(__version__):
+                logger("-----------------------------------------------", color="green", datetime=False)
+                logger(f"New version available: {last_version}.", color="green", datetime=False)
+                update_message = data["files"]["update_message"]["content"]
+                logger(update_message, color="green", datetime=False)
+                logger("-----------------------------------------------", color="green", datetime=False)
+        else:
+            logger("Unable to check for updates.")
 
         managers = create_managers()
         logger(f"{len(managers)} Spacecrypto window (s) found")
