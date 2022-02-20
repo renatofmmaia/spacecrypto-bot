@@ -40,6 +40,7 @@ Smart Chain Wallet(BUSD/BNB/SPG/SPE)
 ###  Configurando o Bot
 - Para que o bot reconheça sua resolução de tela e seja acertivo em seus comandos, você deve criar uma imagem de qualquer tela do space crypto, porém deve conter apenas a área do jogo, igual demonstrado na imagem abaixo, e salvar na pasta "assets/images/targets_global/" com o nome "screen_user.png":
 ![user_screen](https://github.com/renatofmmaia/spacecrypto-bot/blob/main/assets/images/targets_global/screen_full_hd.png?raw=true)
+![space_user](https://github.com/renatofmmaia/spacecrypto-bot/blob/main/assets/infos_and_tutorial/space_user.png?raw=true)
 
 - **IMPORTANTE**: Após iniciar o bot, você não pode redimensionar a tela do navegador(jogo), caso seja necessário redimensionar, você deve repetir o passo acima, criando uma nova imagem da tela do space crypto.
 - Todas as configurações do bot são realizadas através do arquivo config.yaml
