@@ -3,7 +3,7 @@ Bot desenvolvido em python, 100% do código é aberto, para aqueles que tenham c
 O bot em constante atualização, e para que ele continue 100% free, não deixei de realizar sua contribuição, isso nos motiva a continuar!
 
 # Doações
-Faça seus testes, esta usando e ele te ajuda a otimizar seus ganhos? Mostre seu agradecimento em BUSD/BNB/BCOIN, assim nossa equipe se mantem empenhada em atualizar e trazer novas funcionalidades para a comunidade :relaxed:
+Faça seus testes, esta usando e ele te ajuda a otimizar seus ganhos? Mostre seu agradecimento em BUSD/BNB/SPG/SPE, assim nossa equipe se mantem empenhada em atualizar e trazer novas funcionalidades para a comunidade :relaxed:
 
 Smart Chain Wallet(BUSD/BNB/SPG/SPE) 
 
@@ -22,8 +22,7 @@ Smart Chain Wallet(BUSD/BNB/SPG/SPE)
 ###  Requisitos:
 - Instalação do Python, instale pelo [site oficial](https://www.python.org/downloads/) ou pela [windows store](https://www.microsoft.com/p/python-37/9nj46sx7x90p?activetab=pivot:overviewtab) durante a instalação do python, não se esqueça de marcar a opção add Python to Path.
 - ![Path Python](https://github.com/renatofmmaia/spacecrypto-bot/blob/main/assets/infos_and_tutorial/python_path.png)
-- Realizar download do bot, clicando em Code -> Download Zip
-- ![download do bot](https://github.com/renatofmmaia/spacecrypto-bot/blob/main/assets/infos_and_tutorial/bot_download.png)
+- Realizar download da ultima versão do bot em releases do repositorio github, clicando em https://github.com/renatofmmaia/spacecrypto-bot/releases
 - Descompactar o bot na pasta em que desejar
 - (Linux) Instalar o pacote xdtools (responsável por retornar as janelas de navegador no linux) através do comando: sudo apt-get install xdotool
 - (Linux) Instalar pacote Scrot (responsável pela printscreen no linux) através do comando: sudo apt-get install scrot
@@ -38,6 +37,11 @@ Smart Chain Wallet(BUSD/BNB/SPG/SPE)
 - Enjoy the moment :D
 
 ###  Configurando o Bot
+- Para que o bot reconheça sua resolução de tela e seja acertivo em seus comandos, você deve criar uma imagem de qualquer tela do space crypto, porém deve conter apenas a área do jogo, igual demonstrado na imagem abaixo, e salvar na pasta "assets/images/targets_global/" com o nome "screen_user.png":
+![user_screen](https://github.com/renatofmmaia/spacecrypto-bot/blob/main/assets/images/targets_global/screen_full_hd.png?raw=true)
+![space_user](https://github.com/renatofmmaia/spacecrypto-bot/blob/main/assets/infos_and_tutorial/space_user.png?raw=true)
+
+- **IMPORTANTE**: Após iniciar o bot, você não pode redimensionar a tela do navegador(jogo), caso seja necessário redimensionar, você deve repetir o passo acima, criando uma nova imagem da tela do space crypto.
 - Todas as configurações do bot são realizadas através do arquivo config.yaml
 - Configs importantes que você deve se atentar:
 ----------------------------------
