@@ -192,15 +192,13 @@ class Image:
     
     def set_images_resolution():
         im_fh = np.array(Image.TARGETS_GLOBAL['screen_full_hd'])
-        im_fh_w = im_fh.shape[1]
-        im_user = np.array(Image.TARGETS_GLOBAL['screen_user'])
-        im_user_w = im_user.shape[1]
+        im_fh_h, im_fh_w = im_fh.shape[:2]
         
-        # if(im_user_w > im_fh_w):
-        #     logger("Unfortunately your monitor resolution is not supported, please contact our support.")
-        #     quit()
+        im_user = np.array(Image.TARGETS_GLOBAL['screen_user'])
+        im_user_h, im_user_w = im_user.shape[:2]
             
-        user_interface_percent = abs(((im_fh_w - im_user_w) / im_fh_w) * 100)
+        user_interface_percent_w = (im_user_w / im_fh_w)
+        user_interface_percent_h = (im_user_h / im_fh_h)
         
         path_user_by_resolution = f'./assets/images/targets_user'
         
@@ -209,10 +207,9 @@ class Image:
             
         for image_name in Image.TARGETS:            
             image = PIL.Image.open(f'./assets/images/targets/{image_name}.png')
-            h = round(abs(np.array(image).shape[0] - (np.array(image).shape[0] * user_interface_percent) / 100))
-            w = round(abs(np.array(image).shape[1] - (np.array(image).shape[1] * user_interface_percent) / 100))
+            h = round(np.array(image).shape[0] * user_interface_percent_h)
+            w = round(np.array(image).shape[1] * user_interface_percent_w)
             image = image.resize((w,h), PIL.Image.ANTIALIAS)
             image.save(f'{path_user_by_resolution}/{image_name}.png')
-            
-        return user_interface_percent
+
       

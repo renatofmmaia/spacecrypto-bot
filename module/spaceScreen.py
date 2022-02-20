@@ -341,9 +341,22 @@ class Ship:
     
 
     def remove_ships():
-        targets_positions = Image.get_target_positions('button_ship_x')
+        screen_img = Image.screen()
+        x, y, w, h = Image.get_one_target_position("btn_fight_boss", screen_image=screen_img)
+        height_search_area, width_search_area = Image.TARGETS["identify_n_space_shipts_in_battle_board"].shape[:2]
+        y_i = y - height_search_area - Image.MONITOR_TOP
+        y_f = y_i + height_search_area
+        x_i = x - Image.MONITOR_LEFT
+        x_f = x_i + width_search_area
+        search_img = screen_img[y_i:y_f, x_i:x_f]
+        targets_positions = Image.get_target_positions('button_ship_x', screen_image=search_img)
+        for target_position in targets_positions[::-1]:
+            x, y, w, h = target_position
+            x += x_i
+            y += y_i
+            click_randomly_in_position(x,y,w,h)
+        
         if len(targets_positions) > 0:
-            click_one_target('button_ship_x')
             Ship.remove_ships()
 
     def check_lose(manager):
