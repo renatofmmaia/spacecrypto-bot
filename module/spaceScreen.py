@@ -297,7 +297,7 @@ class Ship:
                 while not Ship.check_number_of_ships(Image.screen(), n_ships):
                     if time.time() - start_time > 15:
                         if not Ship.check_number_of_ships(Image.screen(), n_ships):
-                            raise Exception(f"Error trying to send {n_ships} ships to fight. Found only {n_found}.")
+                            raise Exception(f"Error trying to send {n_ships} ships to fight.")
 
 
         if n_ships < Config.get('n_minimum_ships_to_fight'):
