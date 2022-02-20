@@ -122,7 +122,8 @@ class SpaceScreen:
         elif current_screen == SpaceScreenEnum.VICTORY.value:
             logger_translated("Confirm", LoggerEnum.BUTTON_CLICK)
             click_when_one_of_targets_appears(["btn_confirm_gt_10s", "btn_confirm_lt_9s"])
-            SpaceScreen.wait_for_screen(SpaceScreenEnum.HOME.value)
+            SpaceScreen.wait_for_screen(SpaceScreenEnum.FIGHT.value)
+            SpaceScreen.go_to_home(manager)
         else:
             Login.do_login(manager)
             return
@@ -346,3 +347,9 @@ class Ship:
             SpaceScreen.go_to_home(manager)
             Ship.remove_ships()
             manager.set_recharge()
+
+    def check_victory(manager):
+        current_screen = SpaceScreen.get_current_screen()
+        if current_screen == SpaceScreenEnum.VICTORY.value:
+            click_when_one_of_targets_appears(["btn_confirm_gt_10s", "btn_confirm_lt_9s"])
+            SpaceScreen.wait_for_screen(SpaceScreenEnum.FIGHT.value)
