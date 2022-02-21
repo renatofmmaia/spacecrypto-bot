@@ -86,6 +86,14 @@ def move_to(target:str):
 
     return do_with_timeout(move_to_logical)
 
+def move_to_one_of_targets(targets: list, target_global: bool = False):
+    for target in targets:
+        if move_to(target):
+            return True
+
+def move_to_when_one_of_targets_appears(targets: list, time_beteween: float = 0.5, timeout: float = 10, target_global = False):
+    return do_with_timeout(move_to_one_of_targets, args = [targets, target_global], time_beteween=time_beteween, timeout=timeout)
+    
 def scroll_and_click_on_targets(safe_scroll_target: str, repeat: int, distance:float, duration: float, wait:float, function_between, execute_before=True):
     res = []
     if execute_before:
@@ -103,8 +111,13 @@ def scroll_and_click_on_targets(safe_scroll_target: str, repeat: int, distance:f
     
     return res
 
-def scroll(safe_scroll_target: str, distance:float, duration: float, wait:float):
-    move_to(safe_scroll_target)
+def scroll(safe_scroll_target, distance:float, duration: float, wait:float):
+
+    if type(safe_scroll_target) is list:
+        move_to_when_one_of_targets_appears(safe_scroll_target)
+    else:
+        move_to(safe_scroll_target)
+
     pyautogui.mouseDown(duration=0.1)
     pyautogui.moveRel(0, distance, duration)
     time.sleep(0.3)

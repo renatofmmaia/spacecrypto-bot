@@ -63,6 +63,7 @@ class Manager:
         return self.state == StateEnum.STARTING
     
     def set_fighting(self):
+        logger("💪 change state to fighting")
         self.state = StateEnum.FIGHTING
 
     @property
@@ -70,6 +71,7 @@ class Manager:
         return self.state == StateEnum.FIGHTING
     
     def set_recharge(self):
+        logger("💤 change state to recharge")
         self.state = StateEnum.RECHARGE
 
     @property
