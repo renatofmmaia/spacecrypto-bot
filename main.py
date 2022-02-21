@@ -15,7 +15,7 @@ from module.manager import create_managers
 from module.telegram import TelegramBot
 from module.window import get_resolution, WindowsResolutionEnum
 
-__version__ = "0.0.5"
+__version__ = "0.0.6"
 
 
 def main(config_file):
