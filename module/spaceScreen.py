@@ -132,15 +132,20 @@ class SpaceScreen:
 
     def go_to_fight(manager):
         current_screen = SpaceScreen.get_current_screen()
-        if current_screen != SpaceScreenEnum.FIGHT.value:
+        if current_screen == SpaceScreenEnum.FIGHT.value:
+            return
+        elif current_screen == SpaceScreenEnum.LOSE.value:
+            click_when_target_appears("button_confirm_without_time")
+        else:
             SpaceScreen.go_to_home(manager)
             click_when_target_appears("btn_fight_boss")
-            SpaceScreen.wait_for_screen(SpaceScreenEnum.FIGHT.value)
-        else:
-            Login.do_login(manager)
-            return
 
-        SpaceScreen.wait_for_screen(SpaceScreenEnum.FIGHT.value)
+        new_screen = SpaceScreen.wait_for_possible_screen([
+            SpaceScreenEnum.FIGHT,
+            SpaceScreenEnum.LOSE,
+        ])
+        if new_screen == SpaceScreenEnum.LOSE.value:
+            SpaceScreenEnum.go_to_fight(manager)
 
     def do_print_token(manager):
         logger_translated("print token", LoggerEnum.ACTION)
