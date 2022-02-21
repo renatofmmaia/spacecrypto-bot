@@ -21,7 +21,8 @@ Smart Chain Wallet(BUSD/BNB/SPG/SPE)
 # Como utilizar
 ###  Requisitos:
 - Instalação do Python, instale pelo [site oficial](https://www.python.org/downloads/) ou pela [windows store](https://www.microsoft.com/p/python-37/9nj46sx7x90p?activetab=pivot:overviewtab) durante a instalação do python, não se esqueça de marcar a opção add Python to Path.
-- ![Path Python](https://github.com/renatofmmaia/spacecrypto-bot/blob/main/assets/infos_and_tutorial/python_path.png)
+
+![Path Python](https://github.com/renatofmmaia/spacecrypto-bot/blob/main/assets/infos_and_tutorial/python_path.png)
 - Realizar download da ultima versão do bot em releases do repositorio github, clicando em https://github.com/renatofmmaia/spacecrypto-bot/releases
 - Descompactar o bot na pasta em que desejar
 - (Linux) Instalar o pacote xdtools (responsável por retornar as janelas de navegador no linux) através do comando: sudo apt-get install xdotool
@@ -38,7 +39,11 @@ Smart Chain Wallet(BUSD/BNB/SPG/SPE)
 
 ###  Configurando o Bot
 - **IMPORTANTE**: Sempre que acontece um erro no bot, ele registra informações do problema no arquivo logs/logger.log, se precisar pedir alguma ajuda, não esqueça de colocar as informações que foram gravas neste arquivo.
+- **IMPORTANTE**: Antes de iniciar o bot, na tela de naves, selecione a opção **Max Ammo**, para que sempre as naves com mais monição sejam colocadas para cima da lista.
+
+![max_ammo_sample](https://github.com/renatofmmaia/spacecrypto-bot/blob/main/assets/infos_and_tutorial/max_ammo_sample.png?raw=true)
 - Para que o bot reconheça sua resolução de tela e seja acertivo em seus comandos, você deve criar uma imagem de qualquer tela do space crypto, porém deve conter apenas a área do jogo, igual demonstrado na imagem abaixo, e salvar na pasta "assets/images/targets_global/" com o nome "screen_user.png":
+
 ![user_screen](https://github.com/renatofmmaia/spacecrypto-bot/blob/main/assets/images/targets_global/screen_full_hd.png?raw=true)
 ![space_user](https://github.com/renatofmmaia/spacecrypto-bot/blob/main/assets/infos_and_tutorial/space_user.png?raw=true)
 
@@ -63,9 +68,11 @@ Smart Chain Wallet(BUSD/BNB/SPG/SPE)
 - Com o grupo criado, acesse o link a seguir, alterando o TOKEN na url, pelo o que você acabou de criar: https://api.telegram.org/botSEUTOKEN/getUpdates
 - Vai ser exibido na tela um JSON, procure por "chat":"id", geralmente esse valor começa com o sinal de menos(-) e altere no arquivo config.yaml chat_id.
 - Exemplo chat_id
-- ![chatid](https://github.com/renatofmmaia/spacecrypto-bot/blob/main/assets/infos_and_tutorial/chat_id.png)
+
+![chatid](https://github.com/renatofmmaia/spacecrypto-bot/blob/main/assets/infos_and_tutorial/chat_id.png)
 - Config.yaml que você tem que configurar
-- ![config trelegram](https://github.com/renatofmmaia/spacecrypto-bot/blob/main/assets/infos_and_tutorial/token_chat_id.png)
+
+![config trelegram](https://github.com/renatofmmaia/spacecrypto-bot/blob/main/assets/infos_and_tutorial/token_chat_id.png)
 
 ### Possíveis soluções
 - Mantenha a tela do navegador maximizada e a resolução do monitor preferencialmente em 1920x1080.
