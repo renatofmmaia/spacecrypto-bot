@@ -46,13 +46,13 @@ class SpaceScreen:
         return res
 
     def wait_for_possible_screen(
-        spaceScreenEnums: list, time_beteween: float = 0.5, timeout: float = 60
+        spaceScreenEnums: list, time_beteween: float = 0.5, timeout: float = 15
     ):
         def check_screen():
             screen = SpaceScreen.get_current_screen()
-            for space_screen in spaceScreenEnums:
-                if screen == space_screen:
-                    return space_screen
+
+            if SpaceScreenEnum(screen) in spaceScreenEnums:
+                return screen
             else:
                 return None
         res = do_with_timeout(
@@ -60,7 +60,7 @@ class SpaceScreen:
         )
 
         if res is None:
-            screen_names = [space_screen.name for space_screen in spaceScreenEnums].join(", ")
+            screen_names = ", ".join([space_screen.name for space_screen in spaceScreenEnums])
             raise Exception(f'Timeout waiting for one of screens: {screen_names}.')
 
         return res
