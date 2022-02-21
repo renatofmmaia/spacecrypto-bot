@@ -255,7 +255,7 @@ class Ship:
 
                 ship_life = 50 + (life_index * scale_factor)
 
-                logger(f"{ship_life}%", end=" ", datetime=False)
+                logger(f"↳ {ship_life}%", end=" ", datetime=False)
 
                 if ship_life >= ship_work_percent:
                     click_randomly_in_position(x,y,w,h)
@@ -264,7 +264,7 @@ class Ship:
                 else:
                     logger("💤;", datetime=False)
 
-                return False
+            return False
 
         logger(f"Sending ships to fight:")
 
@@ -277,12 +277,7 @@ class Ship:
             buttons_position = Image.get_target_positions("button_fight_on", not_target="button_fight_off", screen_image=screen_img)
 
             if not buttons_position:
-                scroll(
-                    safe_scroll_target="ship_bar_vertical",
-                    distance=Config.get('screen','scroll', 'distance'),
-                    duration=Config.get('screen','scroll', 'duration'),
-                    wait=Config.get('screen','scroll', 'wait'),
-                )
+                Ship.scroll_ships()
                 scroll_times += 1
                 continue
 
@@ -292,7 +287,7 @@ class Ship:
             final_x = inital_x + width_search_area
 
             search_img = screen_img[:,inital_x:final_x, :]
-            logger("↳", end=" ", datetime=False)
+           
 
             ship_work_percent = Config.get('ship_work_percent')
 
@@ -303,6 +298,11 @@ class Ship:
                     if time.time() - start_time > 15:
                         if not Ship.check_number_of_ships(Image.screen(), n_ships):
                             raise Exception(f"Error trying to send {n_ships} ships to fight.")
+            else:
+                Ship.scroll_ships()
+                scroll_times += 1
+                continue
+                
 
 
         if n_ships < Config.get('n_minimum_ships_to_fight'):
@@ -327,6 +327,14 @@ class Ship:
         manager.set_refresh_timer("refresh_ships")
         return True
     
+    def scroll_ships():
+        return scroll(
+            safe_scroll_target=["button_fight_on", "button_fight_off"],
+            distance=Config.get('screen','scroll', 'distance'),
+            duration=Config.get('screen','scroll', 'duration'),
+            wait=Config.get('screen','scroll', 'wait'),
+                )
+                
     def check_number_of_ships(screen_img, n_ships):
         # CROP SCREEN FROM TEXT 'BATTLE':
         x, y, w, h = Image.get_one_target_position("identify_n_space_shipts_in_battle_start_area", screen_image=screen_img)
