@@ -41,7 +41,7 @@ class SpaceScreen:
         )
 
         if res is None:
-            raise Exception(f'Timeout waiting for screen  {spaceScreenEnum(spaceScreenEnum).name}.')
+            raise Exception(f'Timeout waiting for screen  {SpaceScreenEnum(spaceScreenEnum).name}.')
 
         return res
 
