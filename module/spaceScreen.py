@@ -41,7 +41,7 @@ class SpaceScreen:
         )
 
         if res is None:
-            raise Exception(f'Timeout waiting for screen {spaceScreenEnum.name}.')
+            raise Exception(f'Timeout waiting for screen  {spaceScreenEnum(spaceScreenEnum).name}.')
 
         return res
 
@@ -311,8 +311,8 @@ class Ship:
 
         click_when_target_appears('btn_fight_boss')
         current_screen = SpaceScreen.wait_for_possible_screen([
-            SpaceScreenEnum.FIGHT.value,
-            SpaceScreenEnum.LOSE.value,
+            SpaceScreenEnum.FIGHT,
+            SpaceScreenEnum.LOSE,
             ])
         if current_screen == SpaceScreenEnum.LOSE.value:
             click_when_target_appears('button_confirm_without_time', 10)

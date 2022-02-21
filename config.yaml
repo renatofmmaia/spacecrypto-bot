@@ -70,5 +70,5 @@ generals:
 # ------------------------
 threshold:
   default: 0.7
-  to_work: 0.8
+  to_work: 0.9
 # xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
