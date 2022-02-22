@@ -11,6 +11,13 @@ n_minimum_ships_to_fight: 10
 # Accepted values: 50, 75 e 100
 ship_work_percent: 50
 
+# Wave to reset
+# If you dont wanna reset, just let '0'
+# Wave para resetar
+# Se você não quiser resetar, apenas deixe '0'
+
+wave_to_reset: 7
+
 # ---------------------------------------------------------
 telegram:
   # Settings for telegram integration 

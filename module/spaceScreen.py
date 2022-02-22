@@ -25,6 +25,10 @@ class SpaceScreenEnum(Enum):
     LOSE = 5
     VICTORY = 6
 
+# Vai ser usado para dar o delay, na hora do reset
+import time
+boss_cleared = 0
+
 
 class SpaceScreen:
     def wait_for_screen(
@@ -384,7 +388,21 @@ class Ship:
             manager.set_recharge()
 
     def check_victory(manager):
+        global boss_cleared
         current_screen = SpaceScreen.get_current_screen()
         if current_screen == SpaceScreenEnum.VICTORY.value:
             click_when_one_of_targets_appears(["btn_confirm_gt_10s", "btn_confirm_lt_9s"])
             SpaceScreen.wait_for_screen(SpaceScreenEnum.FIGHT.value)
+            boss_cleared = boss_cleared + 1
+            logger(f"🚀 Já eliminei {boss_cleared} boss 🚀")
+
+            #Valida se o usuário quer resetar, pegando o valor do campo e verificando
+            wave_reset = Config.get("wave_to_reset")
+            if(wave_reset > 0 && wave_reset == boss_cleared):
+                current_screen = SpaceScreen.get_current_screen()
+                if current_screen == SpaceScreenEnum.FIGHT.value:
+                    logger("Vou dar surrender por que já matei o total de boss necessário! 🐱‍🏍")
+                    click_when_target_appears("identify_hunting")
+                    time.sleep(3)
+                    click_when_target_appears("confirm-surrender-button")
+                    boss_cleared = 0
