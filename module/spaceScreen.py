@@ -293,11 +293,12 @@ class Ship:
 
             if click_first(buttons_position, search_img):   
                 n_ships +=1
-                start_time = time.time()
-                while not Ship.check_number_of_ships(Image.screen(), n_ships):
-                    if time.time() - start_time > 15:
-                        if not Ship.check_number_of_ships(Image.screen(), n_ships):
-                            raise Exception(f"Error trying to send {n_ships} ships to fight.")
+                time.sleep(0.5)
+                # start_time = time.time()
+                # while not Ship.check_number_of_ships(Image.screen(), n_ships):
+                #     if time.time() - start_time > 15:
+                #         if not Ship.check_number_of_ships(Image.screen(), n_ships):
+                #             raise Exception(f"Error trying to send {n_ships} ships to fight.")
             else:
                 Ship.scroll_ships()
                 scroll_times += 1

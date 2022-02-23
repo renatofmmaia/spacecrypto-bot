@@ -16,7 +16,9 @@ class Image:
     TARGETS_GLOBAL = []
     MONITOR_LEFT = None
     MONITOR_TOP = None
-    
+    TARGETS_DIR = None
+    SCREEN_REFERENCE = None
+
     def load_targets_global():
         path = "assets/images/targets_global/"
         file_names = listdir(path)
@@ -28,7 +30,8 @@ class Image:
         Image.TARGETS_GLOBAL = targets
 
     def load_targets_default():
-        path = "assets/images/targets/"
+        Image.set_best_targets_to_use()
+        path = f"assets/images/{Image.TARGETS_DIR}/"
         file_names = listdir(path)
 
         targets = {}
@@ -191,7 +194,7 @@ class Image:
         return len(result) > 0
     
     def set_images_resolution():
-        im_fh = np.array(Image.TARGETS_GLOBAL['screen_full_hd'])
+        im_fh = np.array(Image.TARGETS_GLOBAL[Image.SCREEN_REFERENCE])
         diag_fh = (im_fh.shape[0]**2 + im_fh.shape[1]**2)**0.5
         
         im_user = np.array(Image.TARGETS_GLOBAL['screen_user'])
@@ -205,10 +208,24 @@ class Image:
             mkdir(path_user_by_resolution)
             
         for image_name in Image.TARGETS:            
-            image = PIL.Image.open(f'./assets/images/targets/{image_name}.png')
+            image = PIL.Image.open(f'./assets/images/{Image.TARGETS_DIR}/{image_name}.png')
             h = round(np.array(image).shape[0] * user_interface_percent)
             w = round(np.array(image).shape[1] * user_interface_percent)
             image = image.resize((w,h), PIL.Image.ANTIALIAS)
             image.save(f'{path_user_by_resolution}/{image_name}.png')
 
-      
+    def set_best_targets_to_use():
+        user = np.array(Image.TARGETS_GLOBAL['screen_user'])
+        diag_user = (user.shape[0]**2 + user.shape[1]**2)**0.5
+
+        hd = np.array(Image.TARGETS_GLOBAL['screen_full_hd'])
+        diag_hd = (hd.shape[0]**2 + hd.shape[1]**2)**0.5
+        
+        hd_ratio = diag_user / diag_hd
+
+        if hd_ratio > 1.05:
+            Image.TARGETS_DIR = 'targets_hd'
+            Image.SCREEN_REFERENCE = 'screen_hd'
+        else :
+            Image.TARGETS_DIR = 'targets'
+            Image.SCREEN_REFERENCE = 'screen_full_hd'
